@@ -22,3 +22,6 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+def bands_detail(request, band_id):
+    band = Band.objects.get(id=band_id)
+    return render(request, 'bands/detail.html', { 'band': band })
