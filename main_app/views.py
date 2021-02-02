@@ -1,6 +1,10 @@
 from django.shortcuts import render
+from django.views.generic.edit import CreateView
 from .models import Band
 
+def BandCreate(CreateView):
+    model = Band
+    fields = '__all__'
 
 def home(request):
     return render(request, 'home.html')
