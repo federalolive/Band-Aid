@@ -4,6 +4,7 @@
 <h1>Band List</h1>
 
 {% for band in bands %}
+<a href="/bands/{{ band.id }}">
   <div class="card">
     <div class="card-content">
       <span class="card-title">{{ band.name }}</span>
@@ -12,6 +13,7 @@
       <p>Description: {{ band.description }}</p>
     </div>
   </div>
+  </a>
 {% endfor %}
 
 {% endblock %}
