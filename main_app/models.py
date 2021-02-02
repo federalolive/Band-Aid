@@ -1,11 +1,10 @@
 from django.db import models
 
 class Band(models.Model):
-    def __init__(self, name, genre, description):
-        self.name = name
-        self.genre = genre
-        self.description = description
-
-bands = [
-    Band('MCS', 'Alt', 'Awesome!')
-]
+    name = models.CharField(max_length=100)
+    genre = models.CharField(max_length=100)
+    dateformed = models.CharField(max_length=4)
+    description = models.TextField(max_length=250)
+    
+    def __str__(self):
+        return self.name
