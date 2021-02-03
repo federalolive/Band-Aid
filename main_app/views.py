@@ -5,6 +5,7 @@ from .models import Band
 def BandCreate(CreateView):
     model = Band
     fields = '__all__'
+    success_url = '/bands/'
 
 def home(request):
     return render(request, 'home.html')
