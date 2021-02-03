@@ -1,10 +1,16 @@
 from django.shortcuts import render
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Band
 
-def BandCreate(CreateView):
+class BandCreate(CreateView):
     model = Band
     fields = '__all__'
+    success_url = '/bands/'
+class BandUpdate(UpdateView):
+    model = Band
+    fields = ['Genre', 'Description']
+class BandDelete(DeleteView):
+    model = Band
     success_url = '/bands/'
 
 def home(request):
