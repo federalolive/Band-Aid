@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Band
 from .forms import AlbumForm
@@ -30,3 +30,11 @@ def bands_detail(request, band_id):
     return render(request, 'bands/detail.html', { 
         'band': band, 'album_form': album_form 
         })
+
+def add_album(request, band_id):
+    form = AlbumForm(request.POST)
+    if form.is_valid():
+        new_album = form.save(commit=False)
+        new_album.band_id = band_id
+        new_album.save()
+    return redirect('detail', band_id=band_id)
