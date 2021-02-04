@@ -49,11 +49,11 @@
         <div class="card">
           <div class="card-content">
             <span class="card-title">
-              A <span style="color: {{ SimilarBand.name }}">{{ SimilarBand.name }}</span> {{ toy.name }}
+              A <span style="color: {{ SimilarBand.genre }}">{{ SimilarBand.genre }}</span> {{ SimilarBand.name }}
             </span>
           </div>
           <div class="card-action">
-            <form action="{% url 'unassoc_toy' cat.id toy.id %}" method="post">
+            <form action="{% url 'unassoc_SimilarBand' band.id SimilarBand.id %}" method="post">
                 {% csrf_token %}
               <button type="submit" class="btn">Remove</button>
             </form>
@@ -61,22 +61,22 @@
         </div>
       {% endfor %}
     {% else %}
-      <h5>No Toys :(</h5>
+      <h5>No Bands Added</h5>
     {% endif %}
   </div>
-  <!-- Available toys will come after this line -->
+
   <div class="col s6">
-    <h3>Available Toys</h3>
-    {% if toys.count %}
-      {% for toy in toys.all %}
+    <h3>Available Bands</h3>
+    {% if SimilarBands.count %}
+      {% for SimilarBand in SimilarBands.all %}
         <div class="card">
           <div class="card-content">
             <span class="card-title">
-              A <span style="color: {{ toy.color }}">{{ toy.color }}</span> {{ toy.name }}
+              A <span style="color: {{ SimilarBand.genre }}">{{ SimilarBand.genre }}</span> {{ SimilarBand.name }}
             </span>
           </div>
           <div class="card-action">
-            <form action="{% url 'assoc_toy' cat.id toy.id %}" method="post">
+            <form action="{% url 'assoc_SimilarBand' band.id SimilarBand.id %}" method="post">
                 {% csrf_token %}
               <button type="submit" class="btn">Add</button>
             </form>
@@ -84,7 +84,7 @@
         </div>
       {% endfor %}
     {% else %}
-      <h5>{{cat.name}} Already Has All Toys Available</h5>
+      <h5>All listed bands have been linked to {{ band.name }}</h5>
     {% endif %}
   </div>
 </div>

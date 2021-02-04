@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Band
+from .models import Band, SimilarBand
 from .forms import AlbumForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+import uuid
 
 class BandCreate(LoginRequiredMixin, CreateView):
     model = Band
@@ -44,3 +47,13 @@ def add_album(request, band_id):
         new_album.band_id = band_id
         new_album.save()
     return redirect('detail', band_id=band_id)
+
+@login_required
+def assoc_SimilarBand(request, band_id, SimilarBand_id):
+  Band.objects.get(id=band_id).SimilarBands.add(band_id)
+  return redirect('detail', band_id=band_id)
+
+@login_required
+def unassoc_SimilarBand(request, band_id, SimilarBand_id):
+  Band.objects.get(id=band_id).SimilarBands.remove(SimilarBand_id)
+  return redirect('detail', band_id=band_id)
