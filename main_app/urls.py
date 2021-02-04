@@ -10,6 +10,6 @@ urlpatterns = [
     path('bands/<int:pk>/update/', views.BandUpdate.as_view(), name='bands_update'),
     path('bands/<int:pk>/delete/', views.BandDelete.as_view(), name='bands_delete'),
     path('bands/<int:band_id>/add_album/', views.add_album, name='add_album'),
-    path('accounts/', include('django.contrib.auth.urls'))
-    
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/signup/', views.signup, name='signup'),
 ]
