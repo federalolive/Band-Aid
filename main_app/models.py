@@ -12,3 +12,7 @@ class Band(models.Model):
     def get_absolute_url(self):
         return reverse("detail", kwargs={"band_id": self.id})
     
+class Album(models.Model):
+    name = models.CharField(max_length=100)
+    release_date = models.DateField()
+
