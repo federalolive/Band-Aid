@@ -14,7 +14,7 @@ class Band(models.Model):
     
 class Album(models.Model):
     name = models.CharField(max_length=100)
-    release_date = models.DateField()
+    release_date = models.DateField('release date')
     band = models.ForeignKey(Band, on_delete=models.CASCADE)
 
 def __str__(self):
