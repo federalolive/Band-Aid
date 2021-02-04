@@ -18,9 +18,14 @@
           <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Band-Aid</a></li>
         </ul>
         <ul class="right">
+        {% if user.is_authenticated %}
           <li><a href="{% url 'about' %}">About</a></li>
           <li><a href="{% url 'bands_create' %}">Add a Band</a></li>
           <li><a href="{% url 'index' %}">View Favorite Bands</a></li>
+          <li><a hrek="{% url 'logout' %}">Log Out</a></li>
+        {% else %}
+          <li><a href="{% url 'login' %}">Log In</a></li>
+        {% endif %}
         </ul>
       </div>
     </nav>

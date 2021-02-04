@@ -2,15 +2,17 @@ from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Band
 from .forms import AlbumForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-class BandCreate(CreateView):
+class BandCreate(LoginRequiredMixin, CreateView):
     model = Band
-    fields = '__all__'
+    fields = ['name', 'genre', 'dateformed', 'description']
     success_url = '/bands/'
-class BandUpdate(UpdateView):
+
+class BandUpdate(LoginRequiredMixin, UpdateView):
     model = Band
     fields = ['genre', 'description']
-class BandDelete(DeleteView):
+class BandDelete(LoginRequiredMixin, DeleteView):
     model = Band
     success_url = '/bands/'
 
