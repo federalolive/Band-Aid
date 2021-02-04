@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Band
+from .forms import AlbumForm
 
 class BandCreate(CreateView):
     model = Band
@@ -8,7 +9,7 @@ class BandCreate(CreateView):
     success_url = '/bands/'
 class BandUpdate(UpdateView):
     model = Band
-    fields = ['Genre', 'Description']
+    fields = ['genre', 'description']
 class BandDelete(DeleteView):
     model = Band
     success_url = '/bands/'
@@ -25,4 +26,7 @@ def bands_index(request):
     
 def bands_detail(request, band_id):
     band = Band.objects.get(id=band_id)
-    return render(request, 'bands/detail.html', { 'band': band })
+    album_form = AlbumForm()
+    return render(request, 'bands/detail.html', { 
+        'band': band, 'album_form': album_form 
+        })
