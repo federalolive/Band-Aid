@@ -12,4 +12,6 @@ urlpatterns = [
     path('bands/<int:band_id>/add_album/', views.add_album, name='add_album'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/signup/', views.signup, name='signup'),
+    path('cats/<int:band_id>/assoc_similarband/<int:similarband_id>/', views.assoc_similarband, name='assoc_similarband'),
+    path('cats/<int:band_id>/unassoc_similarband/<int:similarband_id>/', views.unassoc_similarband, name='unassoc_similarband'),
 ]

@@ -15,7 +15,7 @@ class Band(models.Model):
     genre = models.CharField(max_length=100)
     dateformed = models.CharField(max_length=4)
     description = models.TextField(max_length=250)
-    SimilarBands = models.ManyToManyField(SimilarBand)
+    similarbands = models.ManyToManyField(SimilarBand)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     
     def __str__(self):
@@ -31,3 +31,7 @@ class Album(models.Model):
 
 def __str__(self):
     return f"{self.get_album_display()} on {self.date}"
+
+
+# CONCEPTUAL PSUEDOCODE TO FINISH MANY-TO-MANY
+# What I believe would work is to create model instance referencing, which I run out of time to play around with, however upon researching how to make one model feed into another and then reference the two models, instance referencing seemed to be the answer.

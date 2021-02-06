@@ -46,19 +46,22 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+@login_required
 def bands_index(request):
-    bands = Band.objects.all()
+    bands = Band.objects.filter(user=request.user)
     return render(request, 'bands/index.html', { 'bands': bands })
-    
+
+@login_required    
 def bands_detail(request, band_id):
     band = Band.objects.get(id=band_id)
-    SimilarBands_band_not_linked = SimilarBand.objects.exclude(id__in = band.SimilarBands.all().values_list('id'))
+    similarbands_band_not_linked = SimilarBand.objects.exclude(id__in = band.similarbands.all().values_list('id'))
     album_form = AlbumForm()
     return render(request, 'bands/detail.html', { 
         'band': band, 'album_form': album_form,
-        'SimilarBands': SimilarBands_band_not_linked
+        'similarbands': similarbands_band_not_linked
         })
 
+@login_required
 def add_album(request, band_id):
     form = AlbumForm(request.POST)
     if form.is_valid():
@@ -68,11 +71,11 @@ def add_album(request, band_id):
     return redirect('detail', band_id=band_id)
 
 @login_required
-def assoc_SimilarBand(request, band_id, SimilarBand_id):
-  Band.objects.get(id=band_id).SimilarBands.add(band_id)
+def assoc_similarband(request, band_id, similarband_id):
+  Band.objects.get(id=band_id).similarbands.add(band_id)
   return redirect('detail', band_id=band_id)
 
 @login_required
-def unassoc_SimilarBand(request, band_id, SimilarBand_id):
-  Band.objects.get(id=band_id).SimilarBands.remove(SimilarBand_id)
+def unassoc_similarband(request, band_id, similarband_id):
+  Band.objects.get(id=band_id).SimilarBands.remove(similarband_id)
   return redirect('detail', band_id=band_id)

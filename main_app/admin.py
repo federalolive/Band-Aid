@@ -3,3 +3,4 @@ from .models import Band, Album
 
 admin.site.register(Band)
 admin.site.register(Album)
+# admin.site.register(SimilarBand)
